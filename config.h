@@ -83,6 +83,8 @@ static const char *mutevol[] = { "/usr/bin/amixer", "-q", "-D", "pulse", "sset",
 static const char *next[] = { "/usr/bin/playerctl", "next",  NULL };
 static const char *prev[] = { "/usr/bin/playerctl", "previous",  NULL };
 static const char *playpause[] = { "/usr/bin/playerctl", "play-pause",  NULL };
+static const char *nautiluscmd[] = { "/usr/bin/nautilus", NULL };
+static const char *screenshotcmd[] = { "/usr/bin/gnome-screenshot", "-i", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -94,8 +96,10 @@ static Key keys[] = {
 	{ 0,                     XF86XK_AudioPrev, spawn,		   {.v = prev   } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,        		XK_Print,  spawn,          {.v = screenshotcmd } },
 	{ MODKEY,             			XK_s, 	   spawn,          {.v = spotifycmd } },
 	{ MODKEY,             			XK_i, 	   spawn,          {.v = firefoxcmd } },
+	{ MODKEY,             			XK_n, 	   spawn,          {.v = nautiluscmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
