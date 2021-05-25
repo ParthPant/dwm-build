@@ -3,7 +3,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const Gap default_gap        = {.isgap = 1, .realgap = 5, .gappx = 5};
+static const Gap default_gap        = {.isgap = 0, .realgap = 5, .gappx = 5};
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
@@ -46,6 +46,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "spotify",  NULL,       NULL,       1 << 7,       0,           -1 },
 };
 
 /* layout(s) */
@@ -85,6 +86,8 @@ static const char *prev[] = { "/usr/bin/playerctl", "previous",  NULL };
 static const char *playpause[] = { "/usr/bin/playerctl", "play-pause",  NULL };
 static const char *nautiluscmd[] = { "/usr/bin/nautilus", NULL };
 static const char *screenshotcmd[] = { "/usr/bin/gnome-screenshot", "-i", NULL };
+static const char scratchpadname[] = "scratchpad";
+static const char *scratchpadcmd[] = { "alacritty", "--title", scratchpadname, NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -95,6 +98,7 @@ static Key keys[] = {
 	{ 0,                     XF86XK_AudioPlay, spawn,		   {.v = playpause   } },
 	{ 0,                     XF86XK_AudioPrev, spawn,		   {.v = prev   } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,        		XK_Print,  spawn,          {.v = screenshotcmd } },
 	{ MODKEY,             			XK_s, 	   spawn,          {.v = spotifycmd } },
